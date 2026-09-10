@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppState, Platform, Pressable, Text, View } from "react-native";
+import { AppState, Platform, View } from "react-native";
 import {
   QueryClient,
   QueryClientProvider,
@@ -39,29 +39,7 @@ function Navigation() {
         <Stack.Screen
           name="Consultation"
           component={ConsultationScreen}
-          options={({ navigation }) => ({
-            title: "",
-            headerStyle: { backgroundColor: "#EEE4B6" },
-            headerLeft: () => (
-              <Pressable
-                accessibilityLabel="Back"
-                accessibilityRole="button"
-                onPress={() => {}}
-                style={{ padding: 12 }}
-              >
-                <Text style={{ fontSize: 24 }}>‹</Text>
-              </Pressable>
-            ),
-            headerRight: () => (
-              <Pressable
-                accessibilityRole="button"
-                onPress={() => navigation.popToTop()}
-                style={{ padding: 12 }}
-              >
-                <Text style={{ fontSize: 12 }}>{t.settings}</Text>
-              </Pressable>
-            ),
-          })}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Booking"

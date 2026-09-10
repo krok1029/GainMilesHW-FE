@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackParamList } from "../../../app/navigation/types";
@@ -34,6 +34,17 @@ export function ConsultationScreen({
         <View style={s.content}>
           <ConsultationHero />
           <ConsultationBottomSheet mode={mode} />
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t.backToSettings}
+            onPress={() => navigation.popToTop()}
+            style={({ pressed }) => [
+              s.back,
+              { top: insets.top + 8, opacity: pressed ? 0.5 : 1 },
+            ]}
+          >
+            <View style={s.chevron} />
+          </Pressable>
         </View>
         <View
           style={[s.footer, { paddingBottom: Math.max(insets.bottom, 16) }]}
@@ -59,6 +70,22 @@ export function ConsultationScreen({
 const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#FFF" },
   content: { flex: 1, minHeight: 180 },
+  back: {
+    position: "absolute",
+    left: 0,
+    width: 48,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chevron: {
+    width: 12,
+    height: 12,
+    borderLeftWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: "#383838",
+    transform: [{ rotate: "45deg" }],
+  },
   footer: {
     backgroundColor: "#FFF",
     paddingHorizontal: 22,
