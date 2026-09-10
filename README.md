@@ -46,9 +46,9 @@ npx expo export --platform all
 
 Tests cover duplicate dialogs across entry points, close/reopen, repository ordering and pagination boundaries, cancellation, localized WhatsApp links and Query recovery after next-page failure. GitHub Actions runs checks and exports on pushes and PRs.
 
-Current verification: TypeScript, ESLint and 20 tests pass; iOS/Android/Web JavaScript export passes; iOS prebuild and CocoaPods installation pass. Native iOS compilation is blocked by a local Xcode loader error (`_XPCTypeBool` in CoreDevice/Mercury), before project compilation. Android native compilation has not been run.
+Current verification: TypeScript, ESLint and 22 tests pass; iOS/Android/Web JavaScript export passes; iOS prebuild and CocoaPods installation pass. The Android app runs on the Pixel 9 Pro XL emulator, with both list modes, return navigation and sheet expansion verified. Native iOS compilation is blocked by a local Xcode loader error (`_XPCTypeBool` in CoreDevice/Mercury), before project compilation.
 
-**Visual gap:** the original team banner asset still needs to replace the geometric placeholder. This is not a pixel-perfect final submission yet.
+The consultation banner uses the supplied `assets/bgImage.png`. Use the top-left back icon to return to setup; your demo selections are preserved.
 
 See [implementation notes](docs/implementation.md) for repository replacement, query memory tradeoffs, duplicate-dialog policy and PRD interpretations. See [demo checklist](docs/demo-checklist.md) for a recording script.
 

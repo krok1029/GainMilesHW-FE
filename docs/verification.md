@@ -22,9 +22,24 @@ Tested the exported Web app at a 390 × 844 viewport:
 
 The user's Chrome Dark Reader extension changes preview colors. App styles specify the white sheet and black buttons from the design. Browser settings were not changed.
 
+## Banner and navigation update
+
+- TypeScript, ESLint and Web export pass after replacing the placeholder with `assets/bgImage.png`.
+- Browser verification confirms the team image loads, the top-right settings button is absent, and the top-left back icon returns to setup. English and the 120-specialist selection remain selected after returning.
+- Compared the supplied Figma screenshot with the in-app browser at 375 px wide: the square banner fills the width, the sheet begins at 59% of that width, and the heading has the reference spacing and divider. The background gradient and hidden handle indicator are included in the Web export.
+- TypeScript and ESLint pass after the layout changes. The heading fits on one line at 375 px, and the back icon returns to setup.
+
 ## Not verified / blocked
 
 - Native iOS binary: Xcode aborts before source compilation while loading CoreDevice/Mercury with `Symbol not found: _XPCTypeBool`. Fix or reinstall the local Xcode/OS tooling before repeating `npm run ios`.
-- Android binary compilation and physical-device gestures/hand-offs have not been tested.
+- Physical-device gestures/hand-offs have not been tested. Android emulator checks are recorded below.
 - No appointment was booked, email sent, phone call placed or WhatsApp message sent.
-- Original team-banner asset and demo video remain outstanding. See the demo checklist.
+- The team-banner asset has since been supplied and integrated. The demo video remains outstanding. See the demo checklist.
+
+## Android development render regression
+
+- On the Pixel 9 Pro XL emulator, entering consultation threw an invariant because `@gorhom/bottom-sheet` rejects the deprecated `containerHeight` prop in development. Production Web export did not execute that validator.
+- Removed the prop passed to the library so it measures its container internally. The screen's measured height still determines the two snap points.
+- Added a regression test that renders the real Bottom Sheet in both list modes, mocking native animation machinery and list content only. Both cases reproduced the exact invariant before the fix and pass afterward.
+- TypeScript, ESLint and all 6 Jest suites / 22 tests pass.
+- Verified on Android: the plain list opens with all three specialists; Back returns to setup; the 120-specialist infinite mode opens; dragging the handle moves the sheet from its initial position to its expanded position without a render error.

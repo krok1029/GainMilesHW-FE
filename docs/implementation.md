@@ -38,7 +38,7 @@ Sources read on 2026-09-10:
 - [Figma](https://www.figma.com/design/fOi0NPZ47o56ILJ4cnpgcn/Premium-consultation-UI?node-id=0-1)
 - Interview assignment shared in the preparation task.
 
-The demo configuration screen follows the existing project plan and satisfies the additional feature-entry requirement. Consultation keeps the white sheet, static specialist cards, fixed service hours and two black actions. The left chevron is intentionally inert as specified by the PRD; a separate Demo settings action returns to setup.
+The demo configuration screen follows the existing project plan and satisfies the additional feature-entry requirement. Consultation keeps the white sheet, static specialist cards, fixed service hours and two black actions. Per the updated interaction request, the top-left chevron returns to setup and preserves its selections. There is no top-right Demo settings action.
 
 The PRD contains two WhatsApp message examples: a source-identifying URL and later localized MPF text. This implementation uses the later localized text and adds a localized GUM App source sentence. Messages are percent-encoded and target +852 6030 0900; the app opens a draft and never sends it automatically.
 
@@ -48,10 +48,10 @@ English and Hong Kong Traditional Chinese are supported. Initial language follow
 
 ## Known limitations
 
-- The original team banner could be viewed in Figma but an independent image asset was not obtained. `ConsultationHero.tsx` uses a local geometric placeholder. Replace it with the supplied team image before claiming pixel-perfect fidelity. Profile placeholders match the gray placeholders in Figma.
+- `ConsultationHero.tsx` displays the supplied local `assets/bgImage.png` as a full-width square with a warm gradient overlay. The sheet overlaps the image at 59% of the screen width, with a higher snap point for reading the list. Profile placeholders match the gray placeholders in Figma.
 - The demo is not a CMS, a booking backend or an appointment availability API. Booking remains on the PRD's external service.
 - Real phone, mail and WhatsApp handoff must be checked on devices with compatible apps. No booking or message was submitted during verification.
-- Native binary compilation remains unverified: local Xcode aborts while loading its own CoreDevice/Mercury libraries (`Symbol not found: _XPCTypeBool`), before compiling project source. This is distinct from JavaScript export, which succeeds on iOS, Android and Web.
+- Native iOS compilation remains blocked: local Xcode aborts while loading its own CoreDevice/Mercury libraries (`Symbol not found: _XPCTypeBool`), before compiling project source. The Android app runs on the Pixel 9 Pro XL emulator. JavaScript export succeeds on iOS, Android and Web.
 
 ## Official references
 
