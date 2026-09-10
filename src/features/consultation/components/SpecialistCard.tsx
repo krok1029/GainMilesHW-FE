@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Specialist } from "../types/specialist";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
+
 export const SpecialistCard = memo(function SpecialistCard({
   specialist,
 }: {
@@ -9,6 +10,7 @@ export const SpecialistCard = memo(function SpecialistCard({
 }) {
   const { t } = useI18n();
   const [failed, setFailed] = useState(false);
+
   return (
     <View style={s.card}>
       {specialist.portraitUrl && !failed ? (
@@ -25,6 +27,7 @@ export const SpecialistCard = memo(function SpecialistCard({
     </View>
   );
 });
+
 const s = StyleSheet.create({
   card: {
     flexDirection: "row",
@@ -38,6 +41,8 @@ const s = StyleSheet.create({
     borderWidth: 1,
     boxShadow: "0px 3px 6px rgba(0,0,0,0.07)",
   },
+
   portrait: { width: 76, height: 76, borderRadius: 7, backgroundColor: "#AAA" },
+
   name: { flex: 1, fontSize: 14, color: "#282828", fontWeight: "500" },
 });

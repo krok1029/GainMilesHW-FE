@@ -1,4 +1,5 @@
 import { whatsappUrl } from "./contactLinks";
+
 describe("WhatsApp links", () => {
   it.each(["en", "zh-HK"] as const)(
     "should target GUM and encode the localized message for %s",
@@ -6,6 +7,7 @@ describe("WhatsApp links", () => {
       const target = whatsappUrl;
       const url = new URL(target(locale));
       expect(url.origin + url.pathname).toBe("https://wa.me/85260300900");
+
       expect(url.searchParams.get("text")).toBe(
         locale === "en"
           ? "Hello, I would like to learn more about MPF information.\nI am contacting you via the GUM App."

@@ -1,4 +1,5 @@
 import { createDialogManager } from "./dialogManager";
+
 describe("shared dialog manager", () => {
   it("should accept only one request from two synchronous entry points", () => {
     // Arrange
@@ -10,6 +11,7 @@ describe("shared dialog manager", () => {
     // Assert
     expect(results).toEqual([true, false]);
   });
+
   it("should suppress other dialogs until the current dialog closes", () => {
     const target = createDialogManager();
     target.acquire("coming-soon");
@@ -17,6 +19,7 @@ describe("shared dialog manager", () => {
     target.release("coming-soon");
     expect(target.acquire("link-error")).toBe(true);
   });
+
   it("should allow reopening after close but ignore stale releases", () => {
     const target = createDialogManager();
     target.acquire("coming-soon");

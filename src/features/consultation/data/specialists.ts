@@ -1,5 +1,7 @@
 import { Specialist } from "../types/specialist";
+
 const originalNames = ["Kan Chung", "Alisa Mak", "Justin Liu"];
+
 export function createSpecialist(index: number): Specialist {
   return {
     id: `specialist-${index + 1}`,

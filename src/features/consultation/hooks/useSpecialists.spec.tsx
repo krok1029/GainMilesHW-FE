@@ -11,11 +11,13 @@ describe("infinite specialist query", () => {
     const client = new QueryClient({
       defaultOptions: { queries: { retry: false, gcTime: 0 } },
     });
+
     const repository = createHardcodedSpecialistRepository({
       count: 120,
       scenario: "next-error",
       delayMs: 0,
     });
+
     const wrapper = ({ children }: PropsWithChildren) => (
       <QueryClientProvider client={client}>
         <SpecialistProvider repository={repository}>
@@ -23,27 +25,35 @@ describe("infinite specialist query", () => {
         </SpecialistProvider>
       </QueryClientProvider>
     );
+
     const target = renderHook(useInfiniteSpecialists, { wrapper });
     await waitFor(() => expect(target.result.current.isSuccess).toBe(true));
     const firstPage = target.result.current.data?.pages[0];
+
     // Act
     await act(async () => {
       await target.result.current.fetchNextPage();
     });
+
     // Assert
     await waitFor(() =>
       expect(target.result.current.isFetchNextPageError).toBe(true),
     );
+
     expect(target.result.current.data?.pages).toEqual([firstPage]);
+
     await act(async () => {
       await target.result.current.fetchNextPage();
     });
+
     await waitFor(() =>
       expect(target.result.current.data?.pages).toHaveLength(2),
     );
+
     expect(target.result.current.data?.pages[1].items[0].id).toBe(
       "specialist-13",
     );
+
     target.unmount();
     client.clear();
   });

@@ -4,6 +4,7 @@ import { useI18n } from "../../../shared/i18n/I18nProvider";
 
 export function ConsultationHero() {
   const { t } = useI18n();
+
   return (
     <View style={s.hero} pointerEvents="none">
       <Image
@@ -35,5 +36,6 @@ const s = StyleSheet.create({
     aspectRatio: 1,
     backgroundColor: "#FFF6CA",
   },
+
   image: { width: "100%", height: "100%", opacity: 0.85 },
 });

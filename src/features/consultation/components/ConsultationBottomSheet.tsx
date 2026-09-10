@@ -20,6 +20,7 @@ export function ConsultationBottomSheet({
     ],
     [containerHeight, initialTop, expandedTop],
   );
+
   return (
     <BottomSheet
       index={0}

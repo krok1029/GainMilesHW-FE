@@ -16,10 +16,13 @@ import {
   ErrorState,
   LoadingState,
 } from "./ConsultationContent";
+
 const renderItem: ListRenderItem<Specialist> = ({ item }) => (
   <SpecialistCard specialist={item} />
 );
+
 const keyExtractor = (item: Specialist) => item.id;
+
 const listProps = {
   renderItem,
   keyExtractor,
@@ -28,9 +31,11 @@ const listProps = {
   windowSize: 7,
   maxToRenderPerBatch: 8,
 };
+
 export function PlainSpecialistList() {
   const query = useSpecialists();
   const { t } = useI18n();
+
   return (
     <BottomSheetFlatList<Specialist>
       {...listProps}
@@ -57,17 +62,21 @@ export function PlainSpecialistList() {
     />
   );
 }
+
 export function InfiniteSpecialistList() {
   const query = useInfiniteSpecialists();
   const { t } = useI18n();
   // Query state updates on render; this gate also covers repeated same-turn events.
   const inFlight = useRef(false);
+
   const items = useMemo(
     () => query.data?.pages.flatMap((page) => page.items) ?? [],
     [query.data],
   );
+
   const { hasNextPage, isFetching, isFetchNextPageError, fetchNextPage } =
     query;
+
   const loadMore = useCallback(
     async (retry = false) => {
       if (
@@ -77,7 +86,9 @@ export function InfiniteSpecialistList() {
         (isFetchNextPageError && !retry)
       )
         return;
+
       inFlight.current = true;
+
       try {
         await fetchNextPage({ cancelRefetch: false });
       } finally {
@@ -86,6 +97,7 @@ export function InfiniteSpecialistList() {
     },
     [hasNextPage, isFetching, isFetchNextPageError, fetchNextPage],
   );
+
   return (
     <BottomSheetFlatList<Specialist>
       {...listProps}
@@ -132,6 +144,7 @@ export function InfiniteSpecialistList() {
     />
   );
 }
+
 const s = StyleSheet.create({
   message: {
     fontSize: 13,

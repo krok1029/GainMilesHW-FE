@@ -38,6 +38,8 @@ The next-page failure option is available only with infinite mode and 120 rows. 
 
 ## Validate
 
+Run `npm run format` to format source and configuration files, including blank lines between logical blocks. `npm run format:check` checks Prettier formatting without editing files; ESLint checks the blank-line rules as part of `npm run check`.
+
 ```sh
 npm run check
 npx expo install --check

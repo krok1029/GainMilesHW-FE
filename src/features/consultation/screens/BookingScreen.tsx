@@ -6,15 +6,19 @@ import { Button } from "../../../shared/components/ui";
 import { BOOKING_URL } from "../api/contactLinks";
 import { useContactActions } from "../hooks/useContactActions";
 import { ErrorState, LoadingState } from "../components/ConsultationContent";
+
 export function BookingScreen() {
   const { t } = useI18n();
   const [state, setState] = useState<"idle" | "loading" | "error">("idle");
   const busy = useRef(false);
   const openExternal = useContactActions();
+
   const openInApp = useCallback(async () => {
     if (busy.current) return;
+
     busy.current = true;
     setState("loading");
+
     try {
       await WebBrowser.openBrowserAsync(BOOKING_URL);
       setState("idle");
@@ -24,9 +28,11 @@ export function BookingScreen() {
       busy.current = false;
     }
   }, []);
+
   useEffect(() => {
     if (Platform.OS !== "web") void openInApp();
   }, [openInApp]);
+
   return (
     <View style={s.screen}>
       {state === "loading" ? (
@@ -44,6 +50,7 @@ export function BookingScreen() {
     </View>
   );
 }
+
 const s = StyleSheet.create({
   screen: { flex: 1, padding: 24, gap: 16, backgroundColor: "#FFF" },
 });

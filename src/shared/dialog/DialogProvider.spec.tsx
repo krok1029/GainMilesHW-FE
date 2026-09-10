@@ -2,11 +2,14 @@ import { fireEvent, render, screen } from "@testing-library/react-native";
 import { Button } from "react-native";
 import { DialogProvider, useDialog } from "./DialogProvider";
 import { I18nProvider } from "../i18n/I18nProvider";
+
 jest.mock("expo-localization", () => ({
   getLocales: () => [{ languageCode: "en" }],
 }));
+
 function TwoButtons() {
   const show = useDialog();
+
   return (
     <>
       <Button
@@ -20,6 +23,7 @@ function TwoButtons() {
     </>
   );
 }
+
 describe("DialogProvider", () => {
   it("should render one dialog for rapid calls across buttons and reopen after close", () => {
     // Arrange
@@ -30,6 +34,7 @@ describe("DialogProvider", () => {
         </DialogProvider>
       </I18nProvider>,
     );
+
     // Act
     fireEvent.press(screen.getByText("first"));
     fireEvent.press(screen.getByText("second"));

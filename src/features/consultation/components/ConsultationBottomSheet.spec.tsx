@@ -3,6 +3,7 @@ import { ConsultationBottomSheet } from "./ConsultationBottomSheet";
 
 jest.mock("react-native-reanimated", () => {
   const mock = jest.requireActual("react-native-reanimated/mock");
+
   // The bundled makeMutable mock returns a raw value without SharedValue methods.
   return {
     ...mock,
@@ -10,8 +11,11 @@ jest.mock("react-native-reanimated", () => {
     useReducedMotion: () => false,
   };
 });
+
 jest.mock("./SpecialistList", () => {
-  const { Text } = jest.requireActual<typeof import("react-native")>("react-native");
+  const { Text } =
+    jest.requireActual<typeof import("react-native")>("react-native");
+
   return {
     PlainSpecialistList: () => <Text>Plain specialists</Text>,
     InfiniteSpecialistList: () => <Text>Infinite specialists</Text>,

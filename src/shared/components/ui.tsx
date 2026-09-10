@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+
 export const colors = {
   ink: "#141414",
   muted: "#626262",
@@ -8,6 +9,7 @@ export const colors = {
   line: "#EBE8E0",
   white: "#FFFFFF",
 };
+
 export function Button({
   title,
   onPress,
@@ -40,6 +42,7 @@ export function Button({
     </Pressable>
   );
 }
+
 export function Section({
   title,
   children,
@@ -51,6 +54,7 @@ export function Section({
     </View>
   );
 }
+
 export function Choices<T extends string | number>({
   options,
   value,
@@ -83,6 +87,7 @@ export function Choices<T extends string | number>({
     </View>
   );
 }
+
 export const styles = StyleSheet.create({
   button: {
     backgroundColor: "#000",
@@ -93,20 +98,26 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   buttonLabel: {
     color: "#FFF",
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
   },
+
   secondary: {
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderColor: colors.line,
   },
+
   section: { gap: 12 },
+
   label: { color: colors.ink, fontSize: 14, fontWeight: "600" },
+
   choices: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+
   choice: {
     minHeight: 44,
     paddingHorizontal: 14,
@@ -116,6 +127,8 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#FFF",
   },
+
   selected: { borderColor: colors.gold, backgroundColor: colors.cream },
+
   choiceLabel: { color: colors.ink, fontSize: 13 },
 });

@@ -17,9 +17,12 @@ import { BookingScreen } from "./features/consultation/screens/BookingScreen";
 import { DialogProvider } from "./shared/dialog/DialogProvider";
 import { I18nProvider, useI18n } from "./shared/i18n/I18nProvider";
 import { FeatureFlagProvider } from "./shared/featureFlags/FeatureFlagProvider";
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
 function Navigation() {
   const { t } = useI18n();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -50,6 +53,7 @@ function Navigation() {
     </NavigationContainer>
   );
 }
+
 export default function App() {
   const [client] = useState(
     () =>
@@ -64,13 +68,17 @@ export default function App() {
         },
       }),
   );
+
   useEffect(() => {
     if (Platform.OS === "web") return;
+
     const subscription = AppState.addEventListener("change", (status) =>
       focusManager.setFocused(status === "active"),
     );
+
     return () => subscription.remove();
   }, []);
+
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#E9E6DE" }}>
       <SafeAreaProvider>

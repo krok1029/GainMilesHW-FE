@@ -11,6 +11,7 @@ import {
   ListMode,
   Scenario,
 } from "../../features/consultation/types/specialist";
+
 export function DemoEntryScreen({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "Demo">) {
@@ -22,11 +23,14 @@ export function DemoEntryScreen({
   const [scenario, setScenario] = useState<Scenario>("success");
   const session = useRef(0);
   const insets = useSafeAreaInsets();
+
   const enter = () => {
     if (!consultationEnabled) {
       showDialog("coming-soon");
+
       return;
     }
+
     navigation.navigate("Consultation", {
       mode,
       count,
@@ -34,10 +38,13 @@ export function DemoEntryScreen({
       sessionId: `demo-${Date.now()}-${++session.current}`,
     });
   };
+
   const changeMode = (next: ListMode) => {
     setMode(next);
+
     if (next === "plain" && scenario === "next-error") setScenario("success");
   };
+
   return (
     <ScrollView
       style={s.screen}
@@ -100,6 +107,7 @@ export function DemoEntryScreen({
           value={count}
           onChange={(next) => {
             setCount(next);
+
             if (next === 3 && scenario === "next-error") setScenario("success");
           }}
           options={[
@@ -139,20 +147,25 @@ export function DemoEntryScreen({
     </ScrollView>
   );
 }
+
 const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#FCFBF7" },
+
   container: { padding: 26, gap: 25 },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   brand: {
     fontSize: 31,
     letterSpacing: -2,
     fontWeight: "900",
     color: colors.ink,
   },
+
   tag: {
     color: colors.muted,
     fontSize: 11,
@@ -161,14 +174,18 @@ const s = StyleSheet.create({
     padding: 8,
     borderRadius: 20,
   },
+
   intro: { gap: 10, paddingTop: 12 },
+
   title: {
     color: colors.ink,
     fontSize: 34,
     fontWeight: "700",
     letterSpacing: -1,
   },
+
   subtitle: { fontSize: 13, lineHeight: 20, color: colors.muted },
+
   toggle: {
     flexDirection: "row",
     alignItems: "center",
@@ -179,6 +196,8 @@ const s = StyleSheet.create({
     borderRadius: 14,
     backgroundColor: "#FFF",
   },
+
   label: { fontSize: 15, fontWeight: "600", color: colors.ink },
+
   actions: { gap: 12, paddingTop: 4 },
 });

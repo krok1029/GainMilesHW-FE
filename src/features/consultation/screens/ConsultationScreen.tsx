@@ -11,11 +11,13 @@ import { whatsappUrl } from "../api/contactLinks";
 import { useContactActions } from "../hooks/useContactActions";
 import { ConsultationBottomSheet } from "../components/ConsultationBottomSheet";
 import { ConsultationHero } from "../components/ConsultationHero";
+
 export function ConsultationScreen({
   route,
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "Consultation">) {
   const { count, scenario, mode, sessionId } = route.params;
+
   const repository = useMemo(
     () =>
       createHardcodedSpecialistRepository({
@@ -25,16 +27,20 @@ export function ConsultationScreen({
       }),
     [count, scenario, sessionId],
   );
+
   const { t, locale } = useI18n();
   const insets = useSafeAreaInsets();
   const open = useContactActions();
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
+
   // Keep the image crop tied to screen width, rather than the available list height.
   const initialTop = Math.min(
     contentSize.width * 0.59,
     Math.max(contentSize.height - 180, 0),
   );
+
   const expandedTop = Math.min(insets.top + 52, initialTop);
+
   return (
     <SpecialistProvider repository={repository}>
       <View style={s.screen}>
@@ -90,14 +96,17 @@ export function ConsultationScreen({
     </SpecialistProvider>
   );
 }
+
 const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#FFF" },
+
   content: {
     flex: 1,
     minHeight: 180,
     overflow: "hidden",
     backgroundColor: "#FFF6CA",
   },
+
   back: {
     position: "absolute",
     left: 0,
@@ -106,6 +115,7 @@ const s = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   chevron: {
     width: 12,
     height: 12,
@@ -114,6 +124,7 @@ const s = StyleSheet.create({
     borderColor: "#383838",
     transform: [{ rotate: "45deg" }],
   },
+
   footer: {
     backgroundColor: "#FFF",
     paddingHorizontal: 22,
@@ -122,7 +133,9 @@ const s = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: "#F5F5F5",
   },
+
   hours: { alignItems: "center", paddingBottom: 2 },
+
   hourText: {
     fontSize: 11,
     lineHeight: 17,

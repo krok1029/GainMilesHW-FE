@@ -56,7 +56,9 @@ export const en = {
   specialistPortrait: "Specialist portrait placeholder",
   teamBanner: "GUM consultation team",
 } as const;
+
 export type Messages = { [Key in keyof typeof en]: string };
+
 export const zh: Messages = {
   demo: "諮詢功能示範",
   setup: "由你設定。",
