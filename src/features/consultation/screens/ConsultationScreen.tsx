@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -28,12 +28,35 @@ export function ConsultationScreen({
   const { t, locale } = useI18n();
   const insets = useSafeAreaInsets();
   const open = useContactActions();
+  const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
+  // Keep the image crop tied to screen width, rather than the available list height.
+  const initialTop = Math.min(
+    contentSize.width * 0.59,
+    Math.max(contentSize.height - 180, 0),
+  );
+  const expandedTop = Math.min(insets.top + 52, initialTop);
   return (
     <SpecialistProvider repository={repository}>
       <View style={s.screen}>
-        <View style={s.content}>
+        <View
+          style={s.content}
+          onLayout={({ nativeEvent: { layout } }) => {
+            setContentSize((current) =>
+              current.width === layout.width && current.height === layout.height
+                ? current
+                : { width: layout.width, height: layout.height },
+            );
+          }}
+        >
           <ConsultationHero />
-          <ConsultationBottomSheet mode={mode} />
+          {contentSize.height > 0 && (
+            <ConsultationBottomSheet
+              mode={mode}
+              containerHeight={contentSize.height}
+              initialTop={initialTop}
+              expandedTop={expandedTop}
+            />
+          )}
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t.backToSettings}
@@ -69,7 +92,12 @@ export function ConsultationScreen({
 }
 const s = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#FFF" },
-  content: { flex: 1, minHeight: 180 },
+  content: {
+    flex: 1,
+    minHeight: 180,
+    overflow: "hidden",
+    backgroundColor: "#FFF6CA",
+  },
   back: {
     position: "absolute",
     left: 0,

@@ -23,7 +23,7 @@ const keyExtractor = (item: Specialist) => item.id;
 const listProps = {
   renderItem,
   keyExtractor,
-  contentContainerStyle: { paddingHorizontal: 28, paddingBottom: 24 },
+  contentContainerStyle: { paddingHorizontal: 34, paddingBottom: 24 },
   initialNumToRender: 6,
   windowSize: 7,
   maxToRenderPerBatch: 8,

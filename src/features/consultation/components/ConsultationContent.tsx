@@ -17,6 +17,7 @@ export function ConsultationHeading() {
       <Text accessibilityRole="header" style={s.title}>
         {t.title}
       </Text>
+      <View style={s.divider} />
       <Text style={s.description}>{t.introduction}</Text>
     </View>
   );
@@ -87,10 +88,16 @@ export function ErrorState({
   );
 }
 const s = StyleSheet.create({
-  heading: { gap: 12, paddingBottom: 20, paddingTop: 8 },
-  eyebrow: { fontSize: 14, color: colors.ink },
-  title: { fontSize: 23, lineHeight: 30, fontWeight: "700", color: colors.ink },
-  description: { fontSize: 13, lineHeight: 19, color: colors.muted },
+  heading: { paddingBottom: 20, paddingTop: 16 },
+  eyebrow: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 12,
+    color: colors.ink,
+  },
+  title: { fontSize: 22, lineHeight: 28, fontWeight: "700", color: "#555555" },
+  divider: { height: 1, backgroundColor: "#F1F1F1", marginVertical: 8 },
+  description: { fontSize: 13, lineHeight: 18, color: "#555555" },
   contact: { paddingVertical: 16 },
   small: { fontSize: 12, lineHeight: 18, color: colors.muted },
   link: { color: "#18709F" },

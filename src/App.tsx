@@ -78,7 +78,7 @@ export default function App() {
           style={{
             flex: 1,
             width: "100%",
-            maxWidth: 520,
+            maxWidth: Platform.OS === "web" ? 390 : undefined,
             alignSelf: "center",
             paddingTop: Platform.OS === "web" ? 0 : undefined,
           }}
