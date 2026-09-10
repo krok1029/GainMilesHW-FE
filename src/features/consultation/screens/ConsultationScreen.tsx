@@ -7,7 +7,7 @@ import { SpecialistProvider } from "../../../app/providers/SpecialistProvider";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { Button } from "../../../shared/components/ui";
 import { createHardcodedSpecialistRepository } from "../api/hardcodedSpecialistRepository";
-import { whatsappUrl } from "../api/contactLinks";
+import { whatsappUrl } from "../../../shared/config/contactLinks";
 import { useContactActions } from "../hooks/useContactActions";
 import { ConsultationBottomSheet } from "../components/ConsultationBottomSheet";
 import { ConsultationHero } from "../components/ConsultationHero";

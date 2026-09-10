@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { Button, colors } from "../../../shared/components/ui";
-import { EMAIL_URL, PHONE_URL } from "../api/contactLinks";
+import { EMAIL_URL, PHONE_URL } from "../../../shared/config/contactLinks";
 import { useContactActions } from "../hooks/useContactActions";
 
 export function ConsultationHeading() {

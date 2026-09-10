@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { Button } from "../../../shared/components/ui";
-import { BOOKING_URL } from "../api/contactLinks";
+import { BOOKING_URL } from "../../../shared/config/contactLinks";
 import { useContactActions } from "../hooks/useContactActions";
 import { ErrorState, LoadingState } from "../components/ConsultationContent";
 

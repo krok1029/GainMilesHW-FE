@@ -1,5 +1,5 @@
-import { Locale } from "../../../shared/i18n/I18nProvider";
-import { en, zh } from "../../../shared/i18n/messages";
+import { Locale } from "../i18n/I18nProvider";
+import { en, zh } from "../i18n/messages";
 
 export const BOOKING_URL = "https://gainmiles.simplybook.asia/v2/";
 
