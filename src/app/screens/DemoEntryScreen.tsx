@@ -4,7 +4,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackParamList } from "../navigation/types";
 import { useI18n } from "../../shared/i18n/I18nProvider";
-import { useFeatureFlags } from "../../shared/featureFlags/FeatureFlagProvider";
 import { useDialog } from "../../shared/dialog/DialogProvider";
 import { Button, Choices, colors, Section } from "../../shared/components/ui";
 import {
@@ -16,7 +15,7 @@ export function DemoEntryScreen({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "Demo">) {
   const { t, locale, setLocale } = useI18n();
-  const { consultationEnabled, setConsultationEnabled } = useFeatureFlags();
+  const [consultationEnabled, setConsultationEnabled] = useState(true);
   const showDialog = useDialog();
   const [mode, setMode] = useState<ListMode>("plain");
   const [count, setCount] = useState<3 | 120>(3);

@@ -2,7 +2,7 @@
 
 ## Structure and CMS replacement
 
-`src/app` composes navigation and providers. `features/consultation` owns the specialist repository contract, query hooks and consultation UI. `shared` owns translations, the feature flag and the single dialog host.
+`src/app` composes navigation and providers; its demo entry screen owns the feature flag and demo settings. `features/consultation` owns the specialist repository contract, query hooks and consultation UI. `shared` owns translations and the single dialog host.
 
 The screen receives a `SpecialistRepository` through `SpecialistProvider`. Hooks only depend on `getAll`, `getPage` and `cacheKey`. To integrate a CMS, implement this interface, map its DTOs to `Specialist`, preserve the CMS ordering and stable IDs, pass AbortSignal to fetch, and inject that implementation at the consultation composition point. Cursor strings are opaque to hooks. The local adapter alone interprets them as offsets. `portraitUrl` already supports remote portraits with a placeholder on failure.
 
@@ -10,7 +10,7 @@ The demo assigns a fresh cache key to each entry so error scenarios can be repla
 
 ## Feature flag and duplicate dialogs
 
-`FeatureFlagProvider` supplies the flag to the entry action. Enabled navigates to consultation; disabled calls the shared dialog host. The setting is in memory for this exercise; production could hydrate it from remote configuration with a documented default. This flag is a rollout control, not an authorization mechanism.
+`DemoEntryScreen` keeps the feature flag in local state alongside its other demo settings because it is the only consumer. Enabled navigates to consultation; disabled calls the shared dialog host. Returning from consultation preserves the setting because the demo screen remains mounted; remounting the demo screen resets it to enabled. The setting is in memory for this exercise; production could hydrate it from remote configuration with a documented default. This flag is a rollout control, not an authorization mechanism.
 
 `createDialogManager.acquire` reserves the active slot synchronously before `setState`. Both entry buttons use the same provider and gate. Two calls in the same JavaScript turn cannot acquire two slots, even before React renders. The demo has a button that deliberately calls the entry handler twice synchronously.
 

@@ -16,7 +16,6 @@ import { ConsultationScreen } from "./features/consultation/screens/Consultation
 import { BookingScreen } from "./features/consultation/screens/BookingScreen";
 import { DialogProvider } from "./shared/dialog/DialogProvider";
 import { I18nProvider, useI18n } from "./shared/i18n/I18nProvider";
-import { FeatureFlagProvider } from "./shared/featureFlags/FeatureFlagProvider";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -93,12 +92,10 @@ export default function App() {
         >
           <QueryClientProvider client={client}>
             <I18nProvider>
-              <FeatureFlagProvider>
-                <DialogProvider>
-                  <Navigation />
-                  <StatusBar style="dark" />
-                </DialogProvider>
-              </FeatureFlagProvider>
+              <DialogProvider>
+                <Navigation />
+                <StatusBar style="dark" />
+              </DialogProvider>
             </I18nProvider>
           </QueryClientProvider>
         </View>
