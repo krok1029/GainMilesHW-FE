@@ -43,3 +43,13 @@ The user's Chrome Dark Reader extension changes preview colors. App styles speci
 - Added a regression test that renders the real Bottom Sheet in both list modes, mocking native animation machinery and list content only. Both cases reproduced the exact invariant before the fix and pass afterward.
 - TypeScript, ESLint and all 6 Jest suites / 22 tests pass.
 - Verified on Android: the plain list opens with all three specialists; Back returns to setup; the 120-specialist infinite mode opens; dragging the handle moves the sheet from its initial position to its expanded position without a render error.
+
+## PR screenshots and final checks — 2026-09-10
+
+- Re-ran `npm run check`: Prettier, TypeScript, ESLint and 6 Jest suites / 22 tests pass.
+- `npx expo install --check`: dependencies are up to date.
+- `npx expo export --platform all`: iOS, Android and Web JavaScript/assets export passes.
+- Restarted Metro from source commit `7a1436c` and reloaded the Android development app before capture.
+- Captured seven unmodified 1080 × 2400 screenshots: setup, English consultation, expanded sheet, Traditional Chinese consultation, duplicate-entry dialog, next-page error and successful retry.
+- Android interaction confirms the disabled feature's synchronous double-entry test shows one dialog. In infinite mode with 120 rows, next-page failure retains existing rows; Retry appends rows 13 onward at the same scroll position.
+- See [screenshot index](screenshots/README.md). These checks do not change the native iOS or physical-device limitations recorded above.
