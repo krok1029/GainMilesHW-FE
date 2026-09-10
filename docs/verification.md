@@ -34,7 +34,7 @@ The user's Chrome Dark Reader extension changes preview colors. App styles speci
 - Native iOS binary: Xcode aborts before source compilation while loading CoreDevice/Mercury with `Symbol not found: _XPCTypeBool`. Fix or reinstall the local Xcode/OS tooling before repeating `npm run ios`.
 - Physical-device gestures/hand-offs have not been tested. Android emulator checks are recorded below.
 - No appointment was booked, email sent, phone call placed or WhatsApp message sent.
-- The team-banner asset has since been supplied and integrated. The demo video remains outstanding. See the demo checklist.
+- The team-banner asset has since been supplied and integrated. The demo video has now been recorded; see the video verification entry below.
 
 ## Android development render regression
 
@@ -53,3 +53,11 @@ The user's Chrome Dark Reader extension changes preview colors. App styles speci
 - Captured seven unmodified 1080 × 2400 screenshots: setup, English consultation, expanded sheet, Traditional Chinese consultation, duplicate-entry dialog, next-page error and successful retry.
 - Android interaction confirms the disabled feature's synchronous double-entry test shows one dialog. In infinite mode with 120 rows, next-page failure retains existing rows; Retry appends rows 13 onward at the same scroll position.
 - See [screenshot index](screenshots/README.md). These checks do not change the native iOS or physical-device limitations recorded above.
+
+## Full Android operation video — 2026-09-10
+
+- Added [3:45 operation video with Chinese chapter captions](video/README.md), recorded from source commit `2674063`.
+- Recorded English and Traditional Chinese, sheet expansion, contact information, disabled-feature rapid/synchronous entry, first-request failure and Retry, empty state, 120-row pagination, next-page failure and recovery, and upward scrolling through retained rows.
+- Clicked the booking, external-browser and WhatsApp entries. All external destinations stopped at the emulator's Chrome first-run screen; website loading and a WhatsApp draft remain unverified. No agreement was accepted and no booking/message/call/email was submitted.
+- The final MP4 preserves operation order and removes only long static waits. Added chapter captions above the App frame. Verified H.264, 720 × 1712, 24 fps, 225 seconds; full decoding succeeds.
+- Returning from the browser shows a development warning banner in the recording; this documentation-only task did not diagnose that warning.
