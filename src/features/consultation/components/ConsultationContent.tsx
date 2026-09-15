@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { Button, colors } from "../../../shared/components/ui";
 import { EMAIL_URL, PHONE_URL } from "../../../shared/config/contactLinks";
@@ -31,25 +25,25 @@ export function ContactDetails() {
 
   return (
     <View style={s.contact}>
-      <Text style={s.small}>{t.contact}</Text>
-      <Pressable
-        accessibilityRole="link"
-        onPress={() => void open(PHONE_URL)}
-        style={s.linkArea}
-      >
-        <Text style={s.small}>
-          {t.hotline} <Text style={s.link}>+852 2893 4402</Text>
+      <Text style={s.small}>
+        {t.contactBeforePhone}
+        <Text
+          accessibilityRole="link"
+          onPress={() => void open(PHONE_URL)}
+          style={s.link}
+        >
+          {t.contactPhone}
         </Text>
-      </Pressable>
-      <Pressable
-        accessibilityRole="link"
-        onPress={() => void open(EMAIL_URL)}
-        style={s.linkArea}
-      >
-        <Text style={s.small}>
-          {t.email} <Text style={s.link}>memberservice@gumhk.com</Text>
+        {t.contactBeforeEmail}
+        <Text
+          accessibilityRole="link"
+          onPress={() => void open(EMAIL_URL)}
+          style={s.link}
+        >
+          memberservice@gumhk.com
         </Text>
-      </Pressable>
+        {t.contactAfterEmail}
+      </Text>
       <View style={s.notice}>
         <Text style={s.info}>ⓘ</Text>
         <Text style={[s.small, { flex: 1 }]}>{t.privacy}</Text>
@@ -117,8 +111,6 @@ const s = StyleSheet.create({
   small: { fontSize: 12, lineHeight: 18, color: colors.muted },
 
   link: { color: "#18709F" },
-
-  linkArea: { minHeight: 44, justifyContent: "center" },
 
   notice: {
     flexDirection: "row",

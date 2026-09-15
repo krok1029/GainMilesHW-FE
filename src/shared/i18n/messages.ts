@@ -35,10 +35,11 @@ export const en = {
   holidays: "Saturday, Sunday & Public Holidays: Closed",
   book: "Book appointment",
   whatsapp: "WhatsApp us",
-  contact:
-    "For general enquiries, please feel free to reach out to us using the method below:",
-  hotline: "Hotline:",
-  email: "Email address:",
+  contactBeforePhone:
+    "For general enquiries, please feel free to reach out to us using the method below:\nHotline: ",
+  contactPhone: "+852 2893 4402",
+  contactBeforeEmail: "\nEmail address: ",
+  contactAfterEmail: "",
   privacy:
     "Your use of our appointment service or communication via WhatsApp constitutes your agreement to our collection and use of personal data as outlined in our privacy policy.",
   loading: "Loading specialists…",
@@ -98,9 +99,10 @@ export const zh: Messages = {
   holidays: "星期六、日及公眾假期：休息",
   book: "立即預約諮詢",
   whatsapp: "WhatsApp",
-  contact: "如有一般查詢，歡迎致電本公司熱線或電郵與我們聯絡。",
-  hotline: "熱線：",
-  email: "電郵：",
+  contactBeforePhone: "如有一般查詢，歡迎致電本公司熱線 ",
+  contactPhone: "+852 28934402",
+  contactBeforeEmail: " 或電郵至 ",
+  contactAfterEmail: " 與我們聯絡。",
   privacy:
     "閣下使用本公司之預約服務或透過 WhatsApp 與本公司聯絡，即表示同意本公司根據私隱政策所載條款，收集及使用閣下之個人資料。",
   loading: "正在載入專家名單…",
