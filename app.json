@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "GUM Consultation",
+    "slug": "gainmileshw-fe",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.krok1029.gainmilesconsultation"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.krok1029.gainmilesconsultation"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-localization", "expo-web-browser"],
+    "scheme": "gainmiles-consultation",
+    "newArchEnabled": true
+  }
+}
