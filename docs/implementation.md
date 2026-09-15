@@ -18,6 +18,8 @@ Only one dialog of any key can be visible. Repeated or different keys while one 
 
 ## Plain loading and infinite scrolling
 
+The infinite-mode demo accepts a user-entered total from 0 to 10,000. Input stays as text during editing and is validated on blur or entry, with a translated red inline error. Only decimal digits are accepted after trimming whitespace; empty strings, fractions, signs, exponent notation, separators and out-of-range values are rejected. The 10,000-row cap is a demo guardrail, not a CMS restriction. The repository still generates only the requested page. Plain mode keeps its 3/120 presets. Next-page failure requires more than the shared 12-item page size and resets to Success when it becomes unavailable. The explicit empty scenario continues to override the total.
+
 | Aspect      | Plain                                     | Infinite                                                                                            |
 | ----------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | Fetch       | One `getAll` request                      | `getPage` with 12 items per page                                                                    |

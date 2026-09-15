@@ -1,15 +1,32 @@
 import { useRef, useState } from "react";
-import { ScrollView, StyleSheet, Switch, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackParamList } from "../navigation/types";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { useDialog } from "../../shared/dialog/DialogProvider";
+import { PAGE_SIZE } from "../../features/consultation/hooks/useSpecialists";
 import { Button, Choices, colors, Section } from "../../shared/components/ui";
 import {
   ListMode,
   Scenario,
 } from "../../features/consultation/types/specialist";
+
+function parseSpecialistCount(value: string): number | null {
+  const trimmed = value.trim();
+  const count = Number(trimmed);
+
+  return /^\d+$/.test(trimmed) && Number.isSafeInteger(count) && count <= 10_000
+    ? count
+    : null;
+}
 
 export function DemoEntryScreen({
   navigation,
@@ -18,14 +35,30 @@ export function DemoEntryScreen({
   const [consultationEnabled, setConsultationEnabled] = useState(true);
   const showDialog = useDialog();
   const [mode, setMode] = useState<ListMode>("plain");
-  const [count, setCount] = useState<3 | 120>(3);
+  const [plainCount, setPlainCount] = useState<3 | 120>(3);
+  const [countInput, setCountInput] = useState("120");
+  const [countTouched, setCountTouched] = useState(false);
   const [scenario, setScenario] = useState<Scenario>("success");
   const session = useRef(0);
   const insets = useSafeAreaInsets();
 
+  const count =
+    mode === "infinite" ? parseSpecialistCount(countInput) : plainCount;
+
+  const showCountError = mode === "infinite" && countTouched && count === null;
+
+  const canFailNextPage =
+    mode === "infinite" && count !== null && count > PAGE_SIZE;
+
   const enter = () => {
     if (!consultationEnabled) {
       showDialog("coming-soon");
+
+      return;
+    }
+
+    if (count === null) {
+      setCountTouched(true);
 
       return;
     }
@@ -44,9 +77,23 @@ export function DemoEntryScreen({
     if (next === "plain" && scenario === "next-error") setScenario("success");
   };
 
+  const changeCount = (value: string) => {
+    setCountInput(value);
+    const nextCount = parseSpecialistCount(value);
+
+    if (
+      scenario === "next-error" &&
+      (nextCount === null || nextCount <= PAGE_SIZE)
+    ) {
+      setScenario("success");
+    }
+  };
+
   return (
     <ScrollView
       style={s.screen}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
       contentContainerStyle={[
         s.container,
         {
@@ -101,19 +148,39 @@ export function DemoEntryScreen({
           ]}
         />
       </Section>
-      <Section title={t.dataset}>
-        <Choices
-          value={count}
-          onChange={(next) => {
-            setCount(next);
-
-            if (next === 3 && scenario === "next-error") setScenario("success");
-          }}
-          options={[
-            { label: t.original, value: 3 },
-            { label: t.expanded, value: 120 },
-          ]}
-        />
+      <Section title={mode === "infinite" ? t.specialistCount : t.dataset}>
+        {mode === "infinite" ? (
+          <View style={s.countField}>
+            <TextInput
+              accessibilityLabel={t.specialistCount}
+              accessibilityHint={
+                showCountError ? t.specialistCountError : t.specialistCountHint
+              }
+              value={countInput}
+              onChangeText={changeCount}
+              onBlur={() => setCountTouched(true)}
+              inputMode="numeric"
+              returnKeyType="done"
+              autoCorrect={false}
+              style={[s.countInput, showCountError && s.invalidInput]}
+            />
+            {showCountError ? (
+              <Text style={s.countError} accessibilityLiveRegion="polite">
+                {t.specialistCountError}
+              </Text>
+            ) : null}
+            <Text style={s.subtitle}>{t.specialistCountHint}</Text>
+          </View>
+        ) : (
+          <Choices
+            value={plainCount}
+            onChange={setPlainCount}
+            options={[
+              { label: t.original, value: 3 },
+              { label: t.expanded, value: 120 },
+            ]}
+          />
+        )}
       </Section>
       <Section title={t.scenario}>
         <Choices
@@ -122,7 +189,7 @@ export function DemoEntryScreen({
           options={[
             { label: t.success, value: "success" },
             { label: t.firstError, value: "first-error" },
-            ...(mode === "infinite" && count === 120
+            ...(canFailNextPage
               ? [{ label: t.nextError, value: "next-error" as const }]
               : []),
             { label: t.empty, value: "empty" },
@@ -184,6 +251,24 @@ const s = StyleSheet.create({
   },
 
   subtitle: { fontSize: 13, lineHeight: 20, color: colors.muted },
+
+  countField: { gap: 8 },
+
+  countInput: {
+    minHeight: 48,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: colors.muted,
+    borderRadius: 10,
+    backgroundColor: colors.white,
+    color: colors.ink,
+    fontSize: 16,
+  },
+
+  invalidInput: { borderColor: "#B42318" },
+
+  countError: { color: "#B42318", fontSize: 13, lineHeight: 20 },
 
   toggle: {
     flexDirection: "row",

@@ -16,6 +16,6 @@ export type Scenario = "success" | "first-error" | "next-error" | "empty";
 
 export interface DemoConfig {
   mode: ListMode;
-  count: 3 | 120;
+  count: number;
   scenario: Scenario;
 }
